@@ -32,6 +32,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+#ifdef _MSC_VER
+#define ini_strdup(s) _strdup(s)
+#else
+#define ini_strdup(s) strdup(s)
+#endif
 #include "iniparser.h"
 
 #ifdef __cplusplus
@@ -85,7 +90,7 @@ static char * strskp(char * s)
 {
     char * skip = s;
     if (s==NULL) return NULL ;
-    while (isxspace((int)*skip) && *skip) skip++;
+    while (isspace((int)*skip) && *skip) skip++;
     return skip ;
 }
 
@@ -116,7 +121,7 @@ static char * strcrop(char * s)
     strcpy(l, s);
     last = l + strlen(l);
     while (last > l) {
-        if (!isxspace((int)*(last-1)))
+        if (!isspace((int)*(last-1)))
             break ;
         last -- ;
     }
@@ -325,7 +330,7 @@ static void dictionary_set(dictionary * d, const char * key, const char * val)
                     /* Found a value: modify and return */
                     if (d->val[i]!=NULL)
                         free(d->val[i]);
-                    d->val[i] = val ? strdup(val) : NULL ;
+                    d->val[i] = val ? ini_strdup(val) : NULL ;
                     /* Value has been modified: return */
                     return ;
                 }
@@ -353,8 +358,8 @@ static void dictionary_set(dictionary * d, const char * key, const char * val)
         }
     }
     /* Copy key */
-    d->key[i]  = strdup(key);
-    d->val[i]  = val ? strdup(val) : NULL ;
+    d->key[i]  = ini_strdup(key);
+    d->val[i]  = val ? ini_strdup(val) : NULL ;
     d->hash[i] = hash;
     d->n ++ ;
     return ;
@@ -657,7 +662,7 @@ const char * iniparser_getstring(dictionary * d, const char * key, const char * 
     if (d==NULL || key==NULL)
         return def ;
 
-    lc_key = strdup(strlwc(key));
+    lc_key = ini_strdup(strlwc(key));
     sval = dictionary_get(d, lc_key, def);
     free(lc_key);
     return sval ;
