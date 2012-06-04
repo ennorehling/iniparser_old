@@ -1,6 +1,6 @@
 project (iniparser C)
 
-add_library (iniparser iniparser.c)
+add_library (${PROJECT_NAME} iniparser.c)
 
 find_package (MSVC QUIET)
 if (${MSVC_FOUND})
@@ -8,3 +8,4 @@ if (${MSVC_FOUND})
 endif (${MSVC_FOUND})
 
 set (INIPARSER_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "IniParser headers")
+set (INIPARSER_LIBRARIES iniparser CACHE INTERNAL "IniParser libraries")
