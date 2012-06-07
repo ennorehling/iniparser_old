@@ -1,6 +1,6 @@
 project (iniparser C)
 
-add_library (${PROJECT_NAME} iniparser.c)
+add_library (${PROJECT_NAME} iniparser.c iniparser.h)
 
 IF (MSVC)
     find_package (MSVC MODULE)
