@@ -35,7 +35,8 @@
 #ifdef _MSC_VER
 #define ini_strdup(s) _strdup(s)
 #else
-#define ini_strdup(s) strdup(s)
+/* #define ini_strdup(s) strdup(s) */
+#define ini_strdup(s) strcpy(malloc(1+strlen(s)), s)
 #endif
 #include "iniparser.h"
 
