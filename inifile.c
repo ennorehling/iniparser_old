@@ -6,7 +6,7 @@
 const char *progname = "inifile";
 
 void usage(void) {
-    fprintf(stdout, "Usage: %s file.ini <command> <args>\n", progname);
+    fprintf(stdout, "Usage: %s file.ini [add|del] <args>\n", progname);
 }
 
 int main(int argc, char ** argv) {

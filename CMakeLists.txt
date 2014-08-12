@@ -11,3 +11,4 @@ set (INIPARSER_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR} CACHE INTERNAL "IniParser
 set (INIPARSER_LIBRARIES iniparser CACHE INTERNAL "IniParser libraries")
 include_directories (${CMAKE_CURRENT_SOURCE_DIR})
 add_executable(inifile inifile.c iniparser.c iniparser.h)
+install(TARGETS inifile DESTINATION "bin")
