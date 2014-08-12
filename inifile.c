@@ -1,7 +1,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <iniparser.h>
+#include "iniparser.h"
 
 const char *progname = "inifile";
 
